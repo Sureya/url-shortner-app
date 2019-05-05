@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="input-group mb-3 input-group-lg container">
+    <input type="url" id="url" class="form-control" placeholder="Enter URL"
+           aria-label="Recipient's username" aria-describedby="basic-addon2" href="{{ url }}"
+           value="{{ url }}" disabled="disabled">
+
+    <div class="input-group-append">
+        <button type="button" class="btn btn-primary raw-input"  onclick="copyValue()">
+            COPY </button>
+    </div>
+    <script type="text/javascript">
+        function copyValue() {
+             var copyText = document.getElementById("url");
+             copyText.select();
+             document.execCommand("copy");
+             alert("URL Copied : " + copyText.value);
+        }
+    </script>
+</div>
+
+{% endblock %}

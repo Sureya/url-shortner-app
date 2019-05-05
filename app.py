@@ -29,6 +29,7 @@ def shortened_url():
     return render_template('result.html', url=url), 200
 
 
+#  WIP ******
 @app.route('/<hash>')
 def redirect_url(hash):
     with open('url_list.p') as f:
@@ -38,6 +39,7 @@ def redirect_url(hash):
             return redirect(item[0])
     flash("<strong>Redirect failed:</strong> shortened url does not exist. Enter a url to shorten below.")
     return redirect(url_for('index'))
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

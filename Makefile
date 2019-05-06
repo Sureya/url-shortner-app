@@ -5,3 +5,4 @@ push-code:
 
 start-app:
 	gunicorn app:app -b 0.0.0.0:9558 -w 5
+

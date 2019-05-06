@@ -32,6 +32,12 @@ def persist_records(unqiue_id, url, result_url):
     g.db.commit()
 
 
+def get_url_record(url_hash):
+    sql = "SELECT  url  FROM serverless.short_url WHERE uuid=%s"
+    g.cursor.execute(sql, (url_hash, ))
+    return g.cursor.fetchone()[0]
+
+
 @app.route('/', methods=["GET", "POST"])
 def home_page():
     if request.method == 'POST':
@@ -54,17 +60,13 @@ def shortened_url():
     return render_template('result.html', url=url), 200
 
 
-# #  WIP ******
-# @app.route('/<hash>')
-# def redirect_url(hash):
-#     with open('url_list.p') as f:
-#         url_list = pickle.load(f)
-#     for item in url_list:
-#         if hash == item[1]:
-#             return redirect(item[0])
-#     flash("<strong>Redirect failed:</strong> shortened url does not exist. Enter a url to shorten below.")
-#     return redirect(url_for('index'))
-#
+#  WIP ******
+@app.route('/<hash>')
+def redirect_url(hash):
+    res = get_url_record(short_url.decode_url(hash))
+    logging.info(res)
+    return redirect(res)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

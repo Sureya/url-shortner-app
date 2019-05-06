@@ -1,3 +1,5 @@
 Flask==1.0.2
 short-url==1.2.2
-psycopg2-binary
+psycopg2==2.8.2
+psycopg2-binary==2.8.2
+gunicorn==19.9.0
